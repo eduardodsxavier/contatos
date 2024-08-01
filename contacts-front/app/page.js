@@ -3,18 +3,29 @@
 import { useState } from 'react'
 
 import importedContacts from './Contacts'
-
 let contacts = importedContacts
+let key = contacts.length + 1
 
 export default function Home () {
-  let [contactList, setContactList] = useState(MakeContactList())
-  let key = contacts.length + 1
+  const [contactList, setContactList] = useState(MakeContactList())
 
   function Header() {
     return (
       <header>
         <button onClick={() => AddContact()}>Add Contact</button>
       </header>
+    )
+  }
+
+  function MakeContactList() { 
+    return (
+      contacts.map(contact =>( 
+        <li key={contact.key}>
+          <p>{contact.name}</p>
+          <p>{contact.phone}</p>
+          <button onClick={() => RemoveContact(contact.key)}>Remove Contact</button>
+        </li>
+      ))
     )
   }
 
@@ -29,18 +40,6 @@ export default function Home () {
     contacts = [...contacts, {key, name, phone}]
     key++
     setContactList(MakeContactList)
-  }
-
-  function MakeContactList() { 
-    return (
-      contacts.map(contact =>( 
-          <li key={contact.key}>
-	    <p>{contact.name}</p>
-            <p>{contact.phone}</p>
-            <button onClick={() => RemoveContact(contact.key)}>Remove Contact</button>
-          </li>
-      ))
-    )
   }
 
   return (
