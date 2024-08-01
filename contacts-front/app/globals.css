@@ -1,0 +1,15 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+header{
+  display: flex;
+  justify-content: flex-end;
+  padding: 2em;
+}
+
+li{
+  padding: 2em;
+}
+
