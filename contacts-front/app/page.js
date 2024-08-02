@@ -23,7 +23,7 @@ export default function Home () {
         <li key={contact.key}>
           <p>{contact.name}</p>
           <p>{contact.phone}</p>
-          <button onClick={() => RemoveContact(contact.key)}>Remove Contact</button>
+          <button onClick={() => RemoveContact(contact.key)}>Remove</button>
         </li>
       ))
     )
