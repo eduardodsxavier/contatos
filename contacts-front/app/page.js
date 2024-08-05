@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 
-import importedContacts from './Contacts'
+import importedContacts, { AddContact, RemoveContact } from './Contacts'
+
 let contacts = importedContacts
 let key = contacts.length + 1
 
@@ -12,7 +13,7 @@ export default function Home () {
   function Header() {
     return (
       <header>
-        <button onClick={() => AddContact()}>Add Contact</button>
+        <button onClick={() => CallAddContat()}>Add Contact</button>
       </header>
     )
   }
@@ -20,24 +21,22 @@ export default function Home () {
   function MakeContactList() { 
     return (
       contacts.map(contact =>( 
-        <li key={contact.key}>
+        <li key={contact.id}>
           <p>{contact.name}</p>
           <p>{contact.phone}</p>
-          <button onClick={() => RemoveContact(contact.key)}>Remove</button>
+          <button onClick={() => CallRemoveContact(contact.id)}>Remove</button>
         </li>
       ))
     )
   }
 
-  function RemoveContact (keyToRemove) {
-    contacts = contacts.filter(contact => contact.key !== keyToRemove)
+  function CallRemoveContact(keyToRemove) {
+    contacts = RemoveContact(keyToRemove, contacts)
     setContactList(MakeContactList)
   }
 
-  function AddContact () {
-    const name = prompt("name: ")
-    const phone = prompt("phone: ")
-    contacts = [...contacts, {key, name, phone}]
+  function CallAddContat() {
+    contacts = AddContact(key, contacts)
     key++
     setContactList(MakeContactList)
   }

@@ -1,4 +1,4 @@
-let contacts = [{key:4, name:"khi", phone:"09091215"}, {key:2, name:"mig", phone:"12345678"}, {key:1, name:"edu", phone:"69696969"}, {key:3, name:"adam", phone:"89228922"}]
+let contacts = []
 
 function compareNames(contact1, contact2) {
   if(contact1.name < contact2.name) {
@@ -10,6 +10,18 @@ function compareNames(contact1, contact2) {
   else {
     return 1
   }
+}
+
+export function RemoveContact(keyToRemove, PrevContacts) {
+  PrevContacts = PrevContacts.filter(contact => contact.key !== keyToRemove)
+  return PrevContacts
+}
+
+export function AddContact(key, PrevContacts) {
+  const name = prompt("name: ")
+  const number = prompt("phone: ")
+  PrevContacts = [...PrevContacts, {key, name, number}]
+  return PrevContacts
 }
 
 export default contacts.sort(compareNames)
