@@ -1,4 +1,4 @@
-let contacts = []
+import { getData, addData, removeData } from './JsonCommunicator'
 
 function compareNames(contact1, contact2) {
   if(contact1.name < contact2.name) {
@@ -12,16 +12,18 @@ function compareNames(contact1, contact2) {
   }
 }
 
-export function RemoveContact(keyToRemove, PrevContacts) {
-  PrevContacts = PrevContacts.filter(contact => contact.key !== keyToRemove)
-  return PrevContacts
+export default async function ShowContactList() { 
+  const Data = await getData()
+  const contacts = [...Data].sort(compareNames)
+  return (
+    contacts.map(contact =>( 
+      <li key={contact.id}>
+        <p>{contact.name}</p>
+        <p>{contact.number}</p>
+        <button>Remove</button>
+      </li>
+    ))
+  )
 }
 
-export function AddContact(key, PrevContacts) {
-  const name = prompt("name: ")
-  const number = prompt("phone: ")
-  PrevContacts = [...PrevContacts, {key, name, number}]
-  return PrevContacts
-}
 
-export default contacts.sort(compareNames)
