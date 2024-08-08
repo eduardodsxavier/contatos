@@ -15,9 +15,32 @@ export async function getData() {
   return json 
 }
 
-export async function addData() {
-
+export async function addData(newContact) {
+  body = JSON.stringify({ 
+    requestType: "addContact", 
+    name: newContact.name,
+    number: newContact.number,
+  })
+  POST(body)
 }
 
-export async function removeData() {}
+export async function removeData(idToRemove) {
+  body = JSON.stringify({ 
+    requestType: "removeContact", 
+    id: idToRemove, 
+  })
+  POST(body)
+}
 
+async function POST(requestBody) {
+  const request1 = new Request("http://localhost:8080/contatos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: requestBody,
+  });
+
+  const response1 = await fetch(request1);
+  console.log(response1.status);
+}
